@@ -1,36 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import TodoList from "./components/TodoList";
+import Broadcast from "./components/Broadcast";
+import CreateBroad from "./components/CreateBroad";
+import UpdateBroad from "./components/UpdateBroad";
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-    abc
+    <Router>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <h2 className="heading">
+          <a href="/">TodoList</a>
+          <div className="broad__btn">
+            <Link to="/create-broad" className="btn btn-info btn-sm">Create broad</Link>
+          </div>
+        </h2>
+        <div className="wrapper">
+          <div className="sidebar">
+            <div className="sidebar__title">QLDA - Todolist - nhan</div>
+            <nav className="nav flex-column sidebar__menu">
+              <Link to="/broad" className="nav-link sidebar__link"><i className="sidebar__link-icon fas fa-book"></i>Broad</Link>
+              <Link to="/list" className="nav-link sidebar__link"><i className="sidebar__link-icon far fa-list-alt"></i>List</Link>
+            </nav>
+          </div>
+          <div className="content">
+            <Routes>
+              <Route path="/list" element={<TodoList />} />
+              <Route path="/broad" element={<Broadcast />} />
+              <Route path="/create-broad" element={<CreateBroad />} />
+              <Route path="/update-broad" element={<UpdateBroad />} />
+            </Routes>
+          </div>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </Router>
+  );
 }
 
-export default App
+export default App;
